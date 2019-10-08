@@ -7,9 +7,11 @@ function simpleCalc(expr) {
     expr = expr.replace(/\(|\)/g,'');
     console.log(expr);
     expr = expr.replace(/\-\-/g,'+');
-    let nums = expr.match(/[-+]?[0-9]+\.?[0-9]*/g).map(n => +n);
-    expr = expr.replace(/\d(\-)\d/g, '+'); // (/\d(\-)/g,'+');
-    let signs = expr.match(/\*|\/|\+/g).join('').split(''); //(/\*|\/|\+/g)
+    let nums = expr.match(/[-]?[0-9]+\.?[0-9]*/g).map(n => +n);
+    expr = expr.replace(/[0-9](\-)[0-9]/g, substr => substr.replace('-','+'));
+    expr = expr.replace(/[0-9](\-)[0-9]/g, substr => substr.replace('-', '+'));
+    let signs = expr.match(/\*|\/|\+/g).join('').split('');
+    console.log(expr + " : " + signs);
     let signLength = signs.length;
     let temp;
     for (let i = 0;i < signLength; i++) {
